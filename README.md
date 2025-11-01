@@ -53,11 +53,7 @@ Visit the live demo here:
 
 ---
 
-## 📬 Contact
 
-**Developer / Owner:** [Your Name]  
-**Business Email:** [yourname@email.com]  
-**Website:** [https://yourusername.github.io/import-export-website/](https://yourusername.github.io/import-export-website/)
 
 ---
 
