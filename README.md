@@ -29,7 +29,7 @@ It showcases products, allows customers to view details, choose size and color o
 This website is hosted for **free** using **GitHub Pages**.
 
 Visit the live demo here:  
-👉 [https://yourusername.github.io/import-export-website/](https://yourusername.github.io/import-export-website/)
+👉 [https://Venkatesh5577.github.io/import-export-website/](https://Venkatesh5577.github.io/import-export-website/)
 
 ---
 
