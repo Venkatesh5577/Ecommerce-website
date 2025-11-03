@@ -1,56 +1,87 @@
-// Toggle mobile menu
-const menuToggle = document.getElementById("menu-toggle");
-const navbar = document.getElementById("navbar");
+/* ===========================
+   MOBILE MENU TOGGLE
+=========================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menu-toggle");
+  const navbar = document.getElementById("navbar");
+  const navList = navbar.querySelector("ul");
 
-menuToggle.addEventListener("click", () => {
-  navbar.querySelector("ul").classList.toggle("active");
-  menuToggle.classList.toggle("open");
-});
+  if (menuToggle && navList) {
+    menuToggle.addEventListener("click", () => {
+      navList.classList.toggle("active");
+      menuToggle.classList.toggle("open");
+    });
+  }
 
-// Product Modal Logic
-const modal = document.getElementById("productModal");
-const modalTitle = document.getElementById("modalTitle");
-const modalDescription = document.getElementById("modalDescription");
-const sizeSelect = document.getElementById("sizeSelect");
-const colorSelect = document.getElementById("colorSelect");
-const buyBtn = document.getElementById("buyBtn");
+  /* ===========================
+     PRODUCT MODAL LOGIC
+  =========================== */
+  const modal = document.getElementById("productModal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDescription = document.getElementById("modalDescription");
+  const sizeSelect = document.getElementById("sizeSelect");
+  const colorSelect = document.getElementById("colorSelect");
+  const buyBtn = document.getElementById("buyBtn");
 
-let selectedProduct = "";
+  let selectedProduct = "";
 
-function openDetails(name, description, sizes, colors) {
-  selectedProduct = name;
-  modalTitle.textContent = name;
-  modalDescription.textContent = description;
+  // Open modal
+  window.openDetails = function (name, description, sizes = [], colors = []) {
+    if (!modal || !modalTitle || !modalDescription) return;
 
-  // Populate dropdowns
-  sizeSelect.innerHTML = sizes.map((s) => `<option value="${s}">${s}</option>`).join("");
-  colorSelect.innerHTML = colors.map((c) => `<option value="${c}">${c}</option>`).join("");
+    selectedProduct = name;
+    modalTitle.textContent = name;
+    modalDescription.textContent = description;
 
-  modal.style.display = "flex";
-}
+    sizeSelect.innerHTML = sizes
+      .map((s) => `<option value="${s}">${s}</option>`)
+      .join("");
+    colorSelect.innerHTML = colors
+      .map((c) => `<option value="${c}">${c}</option>`)
+      .join("");
 
-function closeModal() {
-  modal.style.display = "none";
-}
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden"; // Prevent scroll when modal is open
+  };
 
-// Buy Now Button
-buyBtn.addEventListener("click", () => {
-  const size = sizeSelect.value;
-  const color = colorSelect.value;
+  // Close modal
+  window.closeModal = function () {
+    if (modal) modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  };
 
- 
-  const baseURL = "https://forms.gle/b9EhraRGJMs74Nf6A?";
-  const params = new URLSearchParams({
-    "entry.1234567890": selectedProduct, // Product name field
-    "entry.0987654321": size,            // Size field
-    "entry.1122334455": color            // Color field
+  // Close modal when clicking outside content
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
   });
 
-  const formURL = baseURL + params.toString();
-  window.open(formURL, "_blank");
-});
+  // Buy Now button
+  if (buyBtn) {
+    buyBtn.addEventListener("click", () => {
+      const size = sizeSelect ? sizeSelect.value : "";
+      const color = colorSelect ? colorSelect.value : "";
 
-// Close modal if user clicks outside content
-window.onclick = (e) => {
-  if (e.target == modal) closeModal();
-};
+      const baseURL = "https://forms.gle/b9EhraRGJMs74Nf6A?";
+      const params = new URLSearchParams({
+        "entry.1234567890": selectedProduct, // Product name field
+        "entry.0987654321": size,            // Size field
+        "entry.1122334455": color,           // Color field
+      });
+
+      const formURL = baseURL + params.toString();
+      window.open(formURL, "_blank");
+    });
+  }
+
+  /* ===========================
+     SCROLL NAV EFFECT (Optional)
+  =========================== */
+  const header = document.querySelector("header");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  });
+});
