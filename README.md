@@ -19,7 +19,7 @@ It showcases products, allows customers to view details, choose size and color o
 
 ---
 
-## 🧩 Project Structure
+
 
 
 ---
@@ -51,11 +51,9 @@ Visit the live demo here:
 - Google Forms Integration  
 - GitHub Pages (Free Hosting)
 
----
 
 
 
 
----
 
-⭐ *If you like this project, don’t forget to star the repository!*
+
